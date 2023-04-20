@@ -3,7 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
-const wordsRouter = require("./routes/api/words");
+const wordsRouter = require("./routes/api/wordsRoute");
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
