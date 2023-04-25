@@ -9,16 +9,7 @@ const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
-const corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "https://learn-english-words-api.onrender.com/api",
-    "https://cute-tan-slug-hat.cyclic.app",
-  ],
-  credentials: true,
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/words", wordsRouter);
