@@ -1,4 +1,4 @@
-const queryString = require("query-string");
+const queryString = require("querystring");
 const axios = require("axios");
 
 const googleRedirect = async (req, res) => {

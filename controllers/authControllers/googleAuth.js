@@ -1,4 +1,4 @@
-const queryString = require("query-string");
+const queryString = require("querystring");
 
 const googleAuth = async (req, res) => {
   const stringifiedParams = queryString.stringify({
