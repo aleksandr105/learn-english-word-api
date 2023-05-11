@@ -8,6 +8,7 @@ const {
   refresh,
   googleAuth,
   googleRedirect,
+  googleController,
 } = require("../controllers");
 const { ctrlWrapper, validateBody, authenticate } = require("../middlewares");
 const { registerSchema, loginSchema } = require("../models");
@@ -24,6 +25,10 @@ router.post("/refresh", ctrlWrapper(refresh));
 
 router.get("/google", ctrlWrapper(googleAuth));
 
-router.get("/google-redirect", ctrlWrapper(googleRedirect));
+router.get(
+  "/google-redirect",
+  ctrlWrapper(googleRedirect),
+  ctrlWrapper(googleController)
+);
 
 module.exports = router;

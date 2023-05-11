@@ -5,6 +5,7 @@ const currentUser = require("./current");
 const refresh = require("./refresh");
 const googleAuth = require("./googleAuth");
 const googleRedirect = require("./googleRedirect");
+const googleController = require("./googleController");
 
 module.exports = {
   register,
@@ -14,4 +15,5 @@ module.exports = {
   refresh,
   googleAuth,
   googleRedirect,
+  googleController,
 };

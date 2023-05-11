@@ -1,12 +1,12 @@
 const queryString = require("querystring");
 const axios = require("axios");
 
-const googleRedirect = async (req, res) => {
+const googleRedirect = async (req, res, next) => {
   const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
 
   const urlObj = new URL(fullUrl);
 
-  const urlParams = queryString.parse(urlObj.search);
+  const urlParams = queryString.parse(urlObj.search.slice(1));
 
   const code = urlParams.code;
 
@@ -22,21 +22,16 @@ const googleRedirect = async (req, res) => {
     },
   });
 
-  const userData = await axios({
+  const { data } = await axios({
     url: "https://www.googleapis.com/oauth2/v2/userinfo",
     method: "get",
     headers: {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   });
-  // userData.data.email
-  // ...
-  // ...
-  // ...
-  console.log(userData);
-  return res.redirect(
-    `${process.env.FRONTEND_URL}?email=${userData.data.email}`
-  );
+
+  req.userData = data;
+  next();
 };
 
 module.exports = googleRedirect;

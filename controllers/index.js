@@ -7,6 +7,7 @@ const {
   refresh,
   googleAuth,
   googleRedirect,
+  googleController,
 } = require("./authControllers");
 
 module.exports = {
@@ -18,4 +19,5 @@ module.exports = {
   refresh,
   googleAuth,
   googleRedirect,
+  googleController,
 };
