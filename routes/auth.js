@@ -9,13 +9,19 @@ const {
   googleAuth,
   googleRedirect,
   googleController,
+  verifyEmailController,
+  resendEmail,
 } = require("../controllers");
 const { ctrlWrapper, validateBody, authenticate } = require("../middlewares");
-const { registerSchema, loginSchema } = require("../models");
+const { registerSchema, loginSchema, resendSchema } = require("../models");
 
 router.post("/login", validateBody(loginSchema), ctrlWrapper(login));
 
 router.post("/register", validateBody(registerSchema), ctrlWrapper(register));
+
+router.get("/verify/:verificationCode", ctrlWrapper(verifyEmailController));
+
+router.post("/verify", validateBody(resendSchema), ctrlWrapper(resendEmail));
 
 router.post("/logout", authenticate, ctrlWrapper(logout));
 

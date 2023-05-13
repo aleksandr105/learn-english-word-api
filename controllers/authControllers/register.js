@@ -1,6 +1,8 @@
 const { User } = require("../../models");
-const { HttpError } = require("../../helpers");
+const { HttpError, sendEmail } = require("../../helpers");
 const bcrypt = require("bcrypt");
+const { v4 } = require("uuid");
+const { BASE_URL } = process.env;
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -9,11 +11,18 @@ const register = async (req, res) => {
     throw HttpError(409, `Email ${email} already in use`);
 
   const passwordHashed = await bcrypt.hash(password, 10);
+  const verificationCode = v4();
 
   const createUser = await User.create({
     ...req.body,
     password: passwordHashed,
+    verificationCode,
   });
+
+  await sendEmail(
+    createUser.email,
+    `${BASE_URL}/api/auth/verify/${verificationCode}/`
+  );
 
   res.status(201).json(createUser);
 };

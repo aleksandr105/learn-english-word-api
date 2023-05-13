@@ -8,6 +8,8 @@ const {
   googleAuth,
   googleRedirect,
   googleController,
+  verifyEmailController,
+  resendEmail,
 } = require("./authControllers");
 
 module.exports = {
@@ -20,4 +22,6 @@ module.exports = {
   googleAuth,
   googleRedirect,
   googleController,
+  verifyEmailController,
+  resendEmail,
 };
