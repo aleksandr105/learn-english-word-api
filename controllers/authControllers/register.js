@@ -24,7 +24,7 @@ const register = async (req, res) => {
     `${BASE_URL}/api/auth/verify/${verificationCode}/`
   );
 
-  res.status(201).json(createUser);
+  res.status(201).json({ name: createUser.name, email: createUser.email });
 };
 
 module.exports = register;
