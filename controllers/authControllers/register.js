@@ -5,13 +5,14 @@ const { v4 } = require("uuid");
 const { BASE_URL } = process.env;
 
 const register = async (req, res) => {
-  const { email, password, language } = req.body;
+  const { email, password, language = "en" } = req.body;
 
   if (await User.findOne({ email })) {
     const errorMessage = {
       ru: `Почта ${email} уже используется`,
       pl: `Poczta ${email} jest już używana`,
       ua: `Пошта ${email} вже використовується`,
+      en: `Mail ${email} is already in use`,
     };
 
     throw HttpError(409, errorMessage[language]);
