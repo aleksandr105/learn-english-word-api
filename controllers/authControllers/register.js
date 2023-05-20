@@ -5,10 +5,17 @@ const { v4 } = require("uuid");
 const { BASE_URL } = process.env;
 
 const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, language } = req.body;
 
-  if (await User.findOne({ email }))
-    throw HttpError(409, `Email ${email} already in use`);
+  if (await User.findOne({ email })) {
+    const errorMessage = {
+      ru: `Почта ${email} уже используется`,
+      pl: `Poczta ${email} jest już używana`,
+      ua: `Пошта ${email} вже використовується`,
+    };
+
+    throw HttpError(409, errorMessage[language]);
+  }
 
   const passwordHashed = await bcrypt.hash(password, 10);
   const verificationCode = v4();
