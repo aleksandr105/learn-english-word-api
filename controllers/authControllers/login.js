@@ -35,7 +35,11 @@ const login = async (req, res) => {
     }
   );
 
-  res.json({ accessToken, refreshToken });
+  res.json({
+    accessToken,
+    refreshToken,
+    user: { email: user.email, name: user.name },
+  });
 };
 
 module.exports = login;
