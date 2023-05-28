@@ -11,6 +11,8 @@ const refresh = async (req, res) => {
   if (bearer !== "Bearer")
     throw HttpError(401, "invalid token or not authorized");
 
+  if (token) throw HttpError(401, "invalid token or not authorized");
+
   const { exp: tokenExpiration, sessionId: decodeSessionId } =
     jwt.decode(token);
   const currentDate = Math.floor(Date.now() / 1000);
