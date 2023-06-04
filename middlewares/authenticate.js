@@ -20,8 +20,6 @@ const authenticate = async (req, res, next) => {
 
     const user = await User.findById(userId, "-createdAt -updatedAt -password");
 
-    if (!user) next(next(HttpError(404, `User with ${userId} does not exist`)));
-
     req.user = user;
     req.sessionId = sessionId;
 
