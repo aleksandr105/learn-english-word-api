@@ -5,17 +5,31 @@ const jwt = require("jsonwebtoken");
 const { SECRET_KEY, ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } = process.env;
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, language = "en" } = req.body;
+
+  const messageNotCorrectData = {
+    ru: `Пароль или почта не верна`,
+    pl: `Hasło lub e-mail są nieprawidłowe`,
+    ua: `Пароль або пошта не вірна`,
+    en: `Password or email is not correct`,
+  };
+
+  const messageNotConfirmed = {
+    ru: `Почта ${email} не подтверждена`,
+    pl: `Poczta ${email} nie potwierdzona`,
+    ua: `Пошта ${email} не підтверджена`,
+    en: `Email ${email} not confirmed`,
+  };
 
   const user = await User.findOne({ email });
 
-  if (!user) throw HttpError(401, `Email ${email} not registered`);
+  if (!user) throw HttpError(401, messageNotCorrectData[language]);
 
-  if (!user.isVerify) throw HttpError(403, `Email ${email} not confirmed`);
+  if (!user.isVerify) throw HttpError(403, messageNotConfirmed[language]);
 
   const passwordCompare = await bcrypt.compare(password, user.password);
 
-  if (!passwordCompare) throw HttpError(401, "Wrong password");
+  if (!passwordCompare) throw HttpError(401, messageNotCorrectData[language]);
 
   const { _id } = await Session.create({ uid: user._id });
 
