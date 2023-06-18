@@ -11,17 +11,12 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendEmail = async (to, link) => {
+const sendEmail = async (to, emailHtml, subject) => {
   await transporter.sendMail({
     from: SMTP_USER,
     to,
-    subject: "Activate email for LEARN ENGLISH WORDS",
-    html: `
-   <div>
-   <h1>Click on the link to activate e-mail</h1>
-   <a href="${link}" target="_blank">LEARN ENGLISH WORDS ACTIVATE</a>
-   </div> 
-   `,
+    subject,
+    html: emailHtml,
   });
 };
 
