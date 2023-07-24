@@ -65,17 +65,17 @@ const register = async (req, res) => {
   const template = handlebars.compile(htmlReading);
   const linkVerify = `${BASE_URL}/api/auth/verify/${verificationCode}/`;
 
-  await sendEmail(
-    createUser.email,
-    template({
+  await sendEmail({
+    to: createUser.email,
+    emailHtml: template({
       linkVerify,
       buttonTitle: dataTranslation[language].buttonTitle,
       text: dataTranslation[language].text,
       welcomeText: dataTranslation[language].welcomeText,
       userName: name,
     }),
-    dataTranslation[language].subject
-  );
+    subject: dataTranslation[language].subject,
+  });
 
   res.status(201).json({ name: createUser.name, email: createUser.email });
 };

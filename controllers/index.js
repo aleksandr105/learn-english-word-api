@@ -11,6 +11,7 @@ const {
   verifyEmailController,
   resendEmail,
 } = require("./authControllers");
+const { sendDeveloperMessage } = require("./sendControllers");
 
 module.exports = {
   getWords,
@@ -24,4 +25,5 @@ module.exports = {
   googleController,
   verifyEmailController,
   resendEmail,
+  sendDeveloperMessage,
 };
