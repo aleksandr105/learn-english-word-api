@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = async ({ to, emailHtml = "", subject = "", text = "" }) => {
   await transporter.sendMail({
-    from: SMTP_USER,
+    from: '"Learn English Words" <' + SMTP_USER + ">",
     to,
     subject,
     text,
