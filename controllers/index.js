@@ -12,6 +12,7 @@ const {
   resendEmail,
 } = require("./authControllers");
 const { sendDeveloperMessage } = require("./sendControllers");
+const { getTotalUsers } = require("./statisticsControllers");
 
 module.exports = {
   getWords,
@@ -26,4 +27,5 @@ module.exports = {
   verifyEmailController,
   resendEmail,
   sendDeveloperMessage,
+  getTotalUsers,
 };

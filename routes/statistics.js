@@ -1,10 +1,9 @@
 const express = require("express");
-const { authenticate } = require("../middlewares");
+// const { authenticate } = require("../middlewares");
+const { getTotalUsers } = require("../controllers");
 
 const router = express.Router();
 
-router.get("/", authenticate, async (req, res, next) => {
-  res.json({ work: true });
-});
+router.get("/total/users", getTotalUsers);
 
 module.exports = router;
