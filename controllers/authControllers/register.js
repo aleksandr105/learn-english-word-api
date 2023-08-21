@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const handlebars = require("handlebars");
-const { User } = require("../../models");
+const { User, UserWord } = require("../../models");
 const { HttpError, sendEmail } = require("../../helpers");
 const bcrypt = require("bcrypt");
 const { v4 } = require("uuid");
@@ -56,6 +56,8 @@ const register = async (req, res) => {
     password: passwordHashed,
     verificationCode,
   });
+
+  await UserWord.create({ owner: createUser._id });
 
   const templatePath = path.join(
     __dirname,

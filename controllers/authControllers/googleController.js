@@ -1,4 +1,4 @@
-const { User, Session } = require("../../models");
+const { User, Session, UserWord } = require("../../models");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY, ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } = process.env;
 const bcrypt = require("bcrypt");
@@ -17,6 +17,8 @@ const googleController = async (req, res) => {
       password: passwordHashed,
       isVerify: true,
     });
+
+    await UserWord.create({ owner: createUser._id });
 
     const { _id } = await Session.create({ uid: createUser._id });
 

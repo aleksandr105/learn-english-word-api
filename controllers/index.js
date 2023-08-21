@@ -1,4 +1,13 @@
-const { getWords } = require("./wordControllers");
+const {
+  getWords,
+  addToBlockList,
+  removeWithBlockList,
+  getWordsBlockList,
+  getBaseWordsForAuthorizedUser,
+  addUserWord,
+  removeUserWords,
+  getUserWords,
+} = require("./wordControllers");
 const {
   register,
   login,
@@ -28,4 +37,11 @@ module.exports = {
   resendEmail,
   sendDeveloperMessage,
   getTotalUsers,
+  addToBlockList,
+  removeWithBlockList,
+  getWordsBlockList,
+  getBaseWordsForAuthorizedUser,
+  addUserWord,
+  removeUserWords,
+  getUserWords,
 };
