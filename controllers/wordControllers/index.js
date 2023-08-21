@@ -6,6 +6,7 @@ const getBaseWordsForAuthorizedUser = require("./getBaseWordsForAutorizedUser");
 const addUserWord = require("./addUserWord");
 const removeUserWords = require("./removeUserWords");
 const getUserWords = require("./getUserWords");
+const getAllUserWords = require("./getAllUserWords");
 
 module.exports = {
   getWords,
@@ -16,4 +17,5 @@ module.exports = {
   addUserWord,
   removeUserWords,
   getUserWords,
+  getAllUserWords,
 };

@@ -8,6 +8,7 @@ const {
   addUserWord,
   removeUserWords,
   getUserWords,
+  getAllUserWords,
 } = require("../controllers");
 const { ctrlWrapper, validateBody, authenticate } = require("../middlewares");
 const { userWordSchema } = require("../models");
@@ -48,6 +49,8 @@ router.patch(
 );
 
 router.get("/get_user_words", authenticate, ctrlWrapper(getUserWords));
+
+router.get("/get_all_user_words", authenticate, ctrlWrapper(getAllUserWords));
 
 router.delete("/remove_user_words", authenticate, ctrlWrapper(removeUserWords));
 
