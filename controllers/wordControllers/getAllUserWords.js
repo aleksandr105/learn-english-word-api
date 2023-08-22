@@ -6,11 +6,11 @@ const getAllUserWords = async (req, res) => {
     user: { _id },
   } = req;
 
-  const { allUserWords } = await UserWord.findOne({ owner: _id }, "userWords");
+  const { userWords } = await UserWord.findOne({ owner: _id });
 
-  if (!allUserWords) throw HttpError(404, "The document is not found");
+  if (!userWords) throw HttpError(404, "The document is not found");
 
-  res.json(allUserWords);
+  res.json(userWords);
 };
 
 module.exports = getAllUserWords;

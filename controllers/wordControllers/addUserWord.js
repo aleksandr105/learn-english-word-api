@@ -1,5 +1,6 @@
 const { UserWord } = require("../../models");
 const { HttpError } = require("../../helpers");
+const { Types } = require("mongoose");
 
 const addUserWord = async (req, res) => {
   const {
@@ -12,7 +13,7 @@ const addUserWord = async (req, res) => {
 
   const userWords = await UserWord.findOneAndUpdate(
     { owner: _id },
-    { $addToSet: { userWords: word } },
+    { $addToSet: { userWords: { _id: new Types.ObjectId(), ...word } } },
     { new: true }
   );
 

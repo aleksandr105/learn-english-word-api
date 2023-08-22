@@ -22,7 +22,10 @@ const removeUserWords = async (req, res) => {
 
   if (!newUserWords) throw HttpError(404, "The document is not found");
 
-  res.json(newUserWords);
+  res.json({
+    message: `Words [${words}] have been removed from the database`,
+    userWords: newUserWords.userWords,
+  });
 };
 
 module.exports = removeUserWords;

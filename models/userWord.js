@@ -28,7 +28,7 @@ const UserWord = model("user_word", wordUserSchema);
 
 const userWordSchema = Joi.object().pattern(
   /^[a-zA-Z0-9_]{1,13}$/,
-  Joi.string().min(1)
+  Joi.array().items(Joi.string().min(1)).length(3)
 );
 
 module.exports = { UserWord, userWordSchema };
