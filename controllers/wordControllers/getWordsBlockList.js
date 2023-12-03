@@ -10,6 +10,14 @@ const getWordsBlockList = async (req, res) => {
 
   const skip = (page - 1) * limit;
 
+  const totalWords = await UserWord.aggregate([
+    { $match: { owner: _id } },
+    { $unwind: "$blockList" },
+    { $count: "totalCount" },
+  ]);
+
+  const total = totalWords[0].totalCount;
+
   const blockList = await UserWord.aggregate([
     { $match: { owner: _id } },
     { $unwind: "$blockList" },
@@ -22,7 +30,7 @@ const getWordsBlockList = async (req, res) => {
 
   const data = blockList.map((el) => Object.values(el)[0]);
 
-  res.json(data);
+  res.json({ data, total });
 };
 
 module.exports = getWordsBlockList;
