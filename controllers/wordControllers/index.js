@@ -7,6 +7,7 @@ const addUserWord = require("./addUserWord");
 const removeUserWords = require("./removeUserWords");
 const getUserWords = require("./getUserWords");
 const getAllUserWords = require("./getAllUserWords");
+const searchWordsInBlockList = require("./searchWordsInBlockList");
 
 module.exports = {
   getWords,
@@ -18,4 +19,6 @@ module.exports = {
   removeUserWords,
   getUserWords,
   getAllUserWords,
+  searchWordsInBlockList,
+  searchWordsInBlockList,
 };

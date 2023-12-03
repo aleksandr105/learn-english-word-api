@@ -8,6 +8,7 @@ const {
   removeUserWords,
   getUserWords,
   getAllUserWords,
+  searchWordsInBlockList,
 } = require("./wordControllers");
 const {
   register,
@@ -46,4 +47,5 @@ module.exports = {
   removeUserWords,
   getUserWords,
   getAllUserWords,
+  searchWordsInBlockList,
 };

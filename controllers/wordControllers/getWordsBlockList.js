@@ -6,7 +6,14 @@ const getWordsBlockList = async (req, res) => {
     user: { _id },
   } = req;
 
-  const { blockList } = await UserWord.findOne({ owner: _id }, "blockList");
+  const { page, limit } = req.query;
+
+  const skip = (page - 1) * limit;
+
+  const { blockList } = await UserWord.findOne({ owner: _id }, "blockList", {
+    skip,
+    limit: Number(limit),
+  });
 
   if (!blockList) throw HttpError(404, "The document is not found");
 
