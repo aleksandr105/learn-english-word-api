@@ -20,7 +20,9 @@ const getWordsBlockList = async (req, res) => {
 
   if (!blockList) throw HttpError(404, "The document is not found");
 
-  res.json(blockList);
+  const data = blockList.map((el) => Object.values(el)[0]);
+
+  res.json(data);
 };
 
 module.exports = getWordsBlockList;
