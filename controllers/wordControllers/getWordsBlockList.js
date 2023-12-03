@@ -8,9 +8,13 @@ const getWordsBlockList = async (req, res) => {
 
   const { page, limit } = req.query;
 
+  console.log(limit);
+
+  console.log(page);
+
   const skip = (page - 1) * limit;
 
-  const { blockList } = await UserWord.findOne({ owner: _id }, "blockList", {
+  const { blockList } = await UserWord.find({ owner: _id }, "blockList", {
     skip,
     limit: Number(limit),
   });
