@@ -12,35 +12,7 @@ const searchWordsInBlockList = async (req, res) => {
 
   const skip = (page - 1) * limit;
 
-  // const words = await UserWord.aggregate([
-  //   { $match: { owner: _id } },
-  //   {
-  //     $project: {
-  //       matchingWords: {
-  //         $filter: {
-  //           input: "$blockList",
-  //           as: "word",
-  //           cond: {
-  //             $regexMatch: {
-  //               input: "$$word",
-  //               regex: searchText,
-  //               options: "i",
-  //             },
-  //           },
-  //         },
-  //       },
-  //     },
-  //   },
-  //   { $skip: skip },
-  //   { $limit: Number(limit) },
-  // ]);
-
-  const [
-    {
-      totalCount: [{ total }],
-      matchingWords: [{ matchingWords }],
-    },
-  ] = await UserWord.aggregate([
+  const data = await UserWord.aggregate([
     { $match: { owner: _id } },
     {
       $project: {
@@ -86,9 +58,13 @@ const searchWordsInBlockList = async (req, res) => {
       },
     },
   ]);
-  if (!matchingWords) throw HttpError(404, "The user or words is not found");
+  if (!data) throw HttpError(404, "The user or words is not found");
 
-  res.json({ data: matchingWords, total });
+  const elements = data[0].matchingWords[0]?.matchingWords || [];
+
+  const total = data[0].totalCount[0]?.total || 0;
+
+  res.json({ data: elements, total });
 };
 
 module.exports = searchWordsInBlockList;
