@@ -1,6 +1,5 @@
 const { UserWord } = require("../../models");
 const { HttpError } = require("../../helpers");
-const { object } = require("joi");
 
 const getAllUserWords = async (req, res) => {
   const {

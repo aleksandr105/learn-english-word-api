@@ -10,6 +10,7 @@ const {
   getUserWords,
   getAllUserWords,
   searchWordsInBlockList,
+  searchUserWords,
 } = require("../controllers");
 const { ctrlWrapper, validateBody, authenticate } = require("../middlewares");
 const { userWordSchema } = require("../models");
@@ -59,6 +60,12 @@ router.get(
   "/get_search_words_block_list/:searchText",
   authenticate,
   ctrlWrapper(searchWordsInBlockList)
+);
+
+router.get(
+  "/search_user_words/:searchText",
+  authenticate,
+  ctrlWrapper(searchUserWords)
 );
 
 module.exports = router;
