@@ -46,7 +46,7 @@ router.delete(
 router.patch(
   "/add_user_word",
   authenticate,
-  validateBody(userWordSchema),
+  // validateBody(userWordSchema),
   ctrlWrapper(addUserWord)
 );
 
