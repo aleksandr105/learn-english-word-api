@@ -12,8 +12,7 @@ const {
   searchWordsInBlockList,
   searchUserWords,
 } = require("../controllers");
-const { ctrlWrapper, validateBody, authenticate } = require("../middlewares");
-const { userWordSchema } = require("../models");
+const { ctrlWrapper, authenticate } = require("../middlewares");
 
 const router = express.Router();
 
@@ -43,12 +42,7 @@ router.delete(
   ctrlWrapper(removeWithBlockList)
 );
 
-router.patch(
-  "/add_user_word",
-  authenticate,
-  // validateBody(userWordSchema),
-  ctrlWrapper(addUserWord)
-);
+router.patch("/add_user_word", authenticate, ctrlWrapper(addUserWord));
 
 router.get("/get_user_words", authenticate, ctrlWrapper(getUserWords));
 
