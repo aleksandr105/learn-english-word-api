@@ -28,7 +28,14 @@ const addUserWord = async (req, res) => {
 
   const newUserWords = await UserWord.findOneAndUpdate(
     { owner: _id },
-    { $addToSet: { userWords: { _id: new Types.ObjectId(), ...word } } },
+    {
+      $push: {
+        userWords: {
+          $each: [{ _id: new Types.ObjectId(), ...word }],
+          $position: 0,
+        },
+      },
+    },
     { new: true }
   );
 
