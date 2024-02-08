@@ -30,6 +30,18 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
+    statistic: {
+      type: {
+        correctAnswers: {
+          type: Number,
+          default: 0,
+        },
+        incorrectAnswers: {
+          type: Number,
+          default: 0,
+        },
+      },
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -53,6 +65,16 @@ const resendSchema = Joi.object({
   email: Joi.string().pattern(emailRegex).required(),
 });
 
+const statisticSchema = Joi.object({
+  answer: Joi.string().valid("correct", "incorrect").required(),
+});
+
 const User = model("user", userSchema);
 
-module.exports = { User, registerSchema, loginSchema, resendSchema };
+module.exports = {
+  User,
+  registerSchema,
+  loginSchema,
+  resendSchema,
+  statisticSchema,
+};

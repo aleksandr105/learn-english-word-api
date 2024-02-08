@@ -24,7 +24,11 @@ const {
   resendEmail,
 } = require("./authControllers");
 const { sendDeveloperMessage } = require("./sendControllers");
-const { getTotalUsers } = require("./statisticsControllers");
+const {
+  getTotalUsers,
+  saveStatistic,
+  getUserStatistic,
+} = require("./statisticsControllers");
 
 module.exports = {
   getWords,
@@ -50,4 +54,6 @@ module.exports = {
   getAllUserWords,
   searchWordsInBlockList,
   searchUserWords,
+  saveStatistic,
+  getUserStatistic,
 };
