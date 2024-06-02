@@ -1,5 +1,4 @@
 const app = require("./app");
-console.log("Environment Variables:", process.env);
 const { DB, PORT = 3000 } = process.env;
 const mongoose = require("mongoose");
 
