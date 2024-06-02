@@ -3,7 +3,9 @@ const { DB, PORT = 3000 } = process.env;
 const mongoose = require("mongoose");
 
 mongoose
-  .connect(DB)
+  .connect(
+    "mongodb+srv://aleksandr105:SpLink_aleksandr105@nodejs-homework-rest-ap.bugpojg.mongodb.net/learn-english-words?retryWrites=true&w=majority"
+  )
   .then(() => {
     console.log("Database connection successful");
 
