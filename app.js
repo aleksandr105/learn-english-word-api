@@ -3,6 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 // require("dotenv").config();
 if (process.env.NODE_ENV !== "production") {
+  console.log("production");
   require("dotenv").config();
 }
 const app = express();
