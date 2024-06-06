@@ -55,6 +55,10 @@ const register = async (req, res) => {
     ...req.body,
     password: passwordHashed,
     verificationCode,
+    statistic: {
+      correctAnswers: 0,
+      incorrectAnswers: 0,
+    },
   });
 
   await UserWord.create({ owner: createUser._id });

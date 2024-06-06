@@ -16,6 +16,10 @@ const googleController = async (req, res) => {
       name,
       password: passwordHashed,
       isVerify: true,
+      statistic: {
+        correctAnswers: 0,
+        incorrectAnswers: 0,
+      },
     });
 
     await UserWord.create({ owner: createUser._id });
