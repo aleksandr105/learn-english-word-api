@@ -34,7 +34,8 @@ const getUserStatistic = async (req, res) => {
 
   const calculatePercentage = (lessons, allLessons) => {
     const number = (lessons / allLessons) * 100;
-    return Math.floor(number * 10) / 10;
+    if (!number) return 0;
+    return Math.trunc(number * 10) / 10;
   };
 
   const allLessons = correctAnswers + incorrectAnswers;
