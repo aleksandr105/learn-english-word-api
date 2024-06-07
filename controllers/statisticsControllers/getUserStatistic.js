@@ -32,20 +32,30 @@ const getUserStatistic = async (req, res) => {
 
   const { correctAnswers, incorrectAnswers } = statistic.statistic;
 
-  const calculatePercentage = (lessons, allLessons) => {
-    const number = (lessons / allLessons) * 100;
-    if (!number) return 0;
-    return Math.trunc(number * 10) / 10;
+  const allLessons = correctAnswers + incorrectAnswers;
+
+  const calculatePercentage = () => {
+    const number = (correctAnswers / allLessons) * 100;
+
+    if (!number)
+      return { successLessonPercentage: 0, errorLessonPercentage: 0 };
+
+    const successLessonPercentage = Math.floor(number * 10) / 10;
+
+    const errorLessonPercentage = 100 - successLessonPercentage;
+
+    return { successLessonPercentage, errorLessonPercentage };
   };
 
-  const allLessons = correctAnswers + incorrectAnswers;
+  const { successLessonPercentage, errorLessonPercentage } =
+    calculatePercentage();
 
   res.json({
     allLessons,
     correctAnswers,
     incorrectAnswers,
-    successLessonPercentage: calculatePercentage(correctAnswers, allLessons),
-    errorLessonPercentage: calculatePercentage(incorrectAnswers, allLessons),
+    successLessonPercentage,
+    errorLessonPercentage,
     learnedWordsCount: `${blockListCount} / ${allWordsCount}`,
     wordsToLearn: allWordsCount - blockListCount,
     personalDictionaryCount,
