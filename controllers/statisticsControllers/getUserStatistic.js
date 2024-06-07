@@ -40,7 +40,7 @@ const getUserStatistic = async (req, res) => {
     if (!number)
       return { successLessonPercentage: 0, errorLessonPercentage: 0 };
 
-    const successLessonPercentage = Math.floor(number * 10) / 10;
+    const successLessonPercentage = Math.round(number);
 
     const errorLessonPercentage = 100 - successLessonPercentage;
 
